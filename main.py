@@ -279,3 +279,138 @@ try:
     factorial_value = MathOperations.calculate_factorial(-5)
 except ValueError as e:
     print(e)
+# Завдання 4
+class FileUtils:
+    """
+    Реалізує клас для підрахунку рядків у файлі.
+    """
+
+    @staticmethod
+    def count_lines(file_path: str) -> int:
+        """
+        Підраховує та повертає кількість рядків у файлі.
+
+        Аргументи:
+            file_path: Шлях до файлу.
+
+        Повертає:
+            Кількість рядків у файлі.
+        """
+        try:
+            with open(file_path, "r") as f:
+                lines = f.readlines()
+            return len(lines)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Файл не знайдено: {file_path}")
+
+
+file_path = "1.txt"
+line_count = FileUtils.count_lines(file_path)
+print(f"Кількість рядків у файлі: {line_count}")
+
+try:
+    file_path = "2.txt"
+    line_count = FileUtils.count_lines(file_path)
+except FileNotFoundError as e:
+    print(e)
+# Завдання 5
+class Character:
+    """
+    Реалізує клас для опису ігрового персона.
+    """
+
+    def __init__(self, name: str, health: int, damage: int):
+        """
+        Ініціалізація екземпляра класу Character.
+
+        Аргументи:
+            name: Ім'я персонажа.
+            health: Кількість одиниць здоров'я.
+            damage: Кількість одиниць шкоди, яку завдає персонаж.
+        """
+        self.name = name
+        self.health = health
+        self.damage = damage
+
+    @staticmethod
+    def attack(attacker_name: str, target_name: str):
+        """
+        Виводить повідомлення про атаку гравця.
+
+        Аргументи:
+            attacker_name: Ім'я персонажа, який атакує.
+            target_name: Ім'я персонажа, який зазнає атаки.
+        """
+        print(f"{attacker_name} атакує {target_name}!")
+
+    @staticmethod
+    def attack2(attacker_name: str, target_name: str, damage_received: int):
+        """
+        Виводить повідомлення про атаку гравця з інформацією про
+        залишок
+        здоров'я
+        цілі.
+
+        Аргументи:
+            attacker_name: Ім'я персонажа, який атакує.
+            target_name: Ім'я персонажа, який зазнає атаки.
+            damage_received: Кількість одиниць шкоди,
+            отриманих
+            персонажем.
+        """
+        print(f"{attacker_name} атакує {target_name}!")
+        target_health = target.health - damage_received
+        print(f"{target_name} отримав {damage_received} шкоди!")
+        print(f"Залишок здоров'я {target_name}: {target_health}")
+
+player1 = Character("Ksu", 100, 20)
+player2 = Character("Frezzy", 80, 15)
+
+target = player2
+
+player1.attack(player1.name, player2.name)
+player1.attack2(player1.name, player2.name, damage_received=player1.damage)
+# Завдання 6
+class Student:
+    """
+    Реалізує клас для опису студента.
+    """
+
+    def __init__(self, name: str, age: int, grade: float, courses: list):
+        """
+        Ініціалізація екземпляра класу Student.
+
+        Аргументи:
+            name: Ім'я студента.
+            age: Вік студента.
+            grade: Поточний бал студента.
+            courses: Список предметів, які вивчає студент.
+        """
+        self.name = name
+        self.age = age
+        self.grade = grade
+        self.courses = courses
+
+    @staticmethod
+    def add_course(student: "Student", course_name: str):
+        """
+        Додає новий предмет до списку курсів студента.
+
+        Аргументи:
+            student: Екземпляр класу Student.
+            course_name: Назва нового предмета.
+        """
+        if course_name not in student.courses:
+            student.courses.append(course_name)
+            print(f"Предмет {course_name} успішно додано!")
+        else:
+            print(f"Студент {student.name} вже вивчає предмет {course_name}")
+
+
+student1 = Student("Ivan", 20, 4.5, ["Python", "Java"])
+
+student1.add_course(student1, "Data Science")
+student1.add_course(student1, "Python")
+
+print(f"Список предметів {student1.name}: {student1.courses}")
+
