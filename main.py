@@ -279,6 +279,8 @@ try:
     factorial_value = MathOperations.calculate_factorial(-5)
 except ValueError as e:
     print(e)
+
+
 # Завдання 4
 class FileUtils:
     """
@@ -313,6 +315,8 @@ try:
     line_count = FileUtils.count_lines(file_path)
 except FileNotFoundError as e:
     print(e)
+
+
 # Завдання 5
 class Character:
     """
@@ -344,7 +348,7 @@ class Character:
         print(f"{attacker_name} атакує {target_name}!")
 
     @staticmethod
-    def attack2(attacker_name: str, target_name: str, damage_received: int):
+    def attack2(attacker: "Character", target: "Character"):
         """
         Виводить повідомлення про атаку гравця з інформацією про
         залишок
@@ -352,24 +356,21 @@ class Character:
         цілі.
 
         Аргументи:
-            attacker_name: Ім'я персонажа, який атакує.
-            target_name: Ім'я персонажа, який зазнає атаки.
-            damage_received: Кількість одиниць шкоди,
-            отриманих
-            персонажем.
+            attacker: Екземпляр класу Character, який атакує.
+            target: Екземпляр класу Character, який зазнає атаки.
         """
-        print(f"{attacker_name} атакує {target_name}!")
-        target_health = target.health - damage_received
-        print(f"{target_name} отримав {damage_received} шкоди!")
-        print(f"Залишок здоров'я {target_name}: {target_health}")
+        print(f"{attacker.name} атакує {target.name}!")
+        target.health -= attacker.damage
+        print(f"{target.name} отримав {attacker.damage} шкоди!")
+        print(f"Залишок здоров'я {target.name}: {target.health}")
+
 
 player1 = Character("Ksu", 100, 20)
 player2 = Character("Frezzy", 80, 15)
 
-target = player2
+player1.attack2(player1, player2)
 
-player1.attack(player1.name, player2.name)
-player1.attack2(player1.name, player2.name, damage_received=player1.damage)
+
 # Завдання 6
 class Student:
     """
@@ -413,4 +414,3 @@ student1.add_course(student1, "Data Science")
 student1.add_course(student1, "Python")
 
 print(f"Список предметів {student1.name}: {student1.courses}")
-
